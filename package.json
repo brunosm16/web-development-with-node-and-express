@@ -1,0 +1,23 @@
+{
+  "name": "web-development-with-node-express",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "brunosm16 <brunoskr23@gmail.com>",
+  "license": "MIT",
+  "keywords": [
+    "mongodb",
+    "express",
+    "nodejs"
+  ],
+  "scripts": {
+    "start:dev": "nodemon index.js"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  },
+  "dependencies": {
+    "@faker-js/faker": "^8.0.2",
+    "expres": "^0.0.5",
+    "express-handlebars": "3.0.2"
+  }
+}
