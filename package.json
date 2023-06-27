@@ -14,7 +14,8 @@
 		"prettier:check": "npx prettier --check .",
 		"prettier:fix": "npx prettier --write .",
 		"lint": "npx eslint .",
-		"lint:fix": "npx eslint --fix"
+		"lint:fix": "npx eslint --fix",
+		"prepare": "husky install"
 	},
 	"devDependencies": {
 		"@commitlint/cli": "^17.6.6",
@@ -27,6 +28,8 @@
 		"eslint-plugin-import": "^2.27.5",
 		"eslint-plugin-prettier": "^4.2.1",
 		"git-cz": "^4.9.0",
+		"husky": "^8.0.3",
+		"lint-staged": "^13.2.2",
 		"nodemon": "^2.0.22",
 		"prettier": "^2.8.8"
 	},
