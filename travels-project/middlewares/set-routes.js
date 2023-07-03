@@ -1,3 +1,4 @@
+const { faker } = require('@faker-js/faker');
 const { STATUS_CODE_400, STATUS_CODE_500 } = require('../constants/http-status-codes');
 
 const HOMEPAGE_VIEW = 'home';
@@ -10,7 +11,7 @@ const sendResponse = (view, res, status = null) => {
 	if (!res) throw new Error('Response was not provided');
 	if (status) res.status(status);
 
-	res.render(view);
+	res.render(view, { suggestionCity: faker.location.city() });
 };
 
 const setRoutes = (app) => {

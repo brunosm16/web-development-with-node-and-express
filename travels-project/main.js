@@ -12,8 +12,9 @@ app.engine(
 		defaultLayout: 'main',
 	})
 );
-
 app.set('view engine', 'handlebars');
+
+app.use(express.static(`${__dirname}/public`));
 
 setRoutes(app);
 
