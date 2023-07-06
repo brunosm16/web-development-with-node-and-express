@@ -1,28 +1,32 @@
-const { STATUS_CODE_400, STATUS_CODE_500 } = require('../constants/http-status-codes');
+const {
+	STATUS_CODE_400,
+	STATUS_CODE_500,
+	STATUS_CODE_200,
+} = require('../constants/http-status-codes');
+const {
+	HOMEPAGE_VIEW,
+	ABOUT_VIEW,
+	NOT_FOUND_VIEW,
+	INTERNAL_SERVER_ERROR_VIEW,
+} = require('../constants/views-names');
 const { getRandomCity } = require('../lib/city-suggestion');
+const renderView = require('../lib/route-handlers');
 
-const HOMEPAGE_VIEW = 'home';
-const ABOUT_VIEW = 'about';
-const NOT_FOUND_VIEW = '404';
-const INTERNAL_SERVER_ERROR_VIEW = '500';
 const API_PREFIX = '/travels';
 
-const sendResponse = (view, res, status = null) => {
-	if (!res) throw new Error('Response was not provided');
-	if (status) res.status(status);
-
-	res.render(view, { suggestionCity: getRandomCity() });
-};
-
 const setRoutes = (app) => {
-	app.get(`${API_PREFIX}/`, (req, res) => sendResponse(HOMEPAGE_VIEW, res));
+	app.get(`${API_PREFIX}/`, (req, res) =>
+		renderView(req, res, HOMEPAGE_VIEW, STATUS_CODE_200, { suggestionCity: getRandomCity() })
+	);
 
-	app.get(`${API_PREFIX}/about`, (req, res) => sendResponse(ABOUT_VIEW, res));
+	app.get(`${API_PREFIX}/about`, (req, res) => renderView(req, res, ABOUT_VIEW, STATUS_CODE_200));
 
-	app.use((req, res) => sendResponse(NOT_FOUND_VIEW, res, STATUS_CODE_400));
+	app.use((req, res) => renderView(req, res, NOT_FOUND_VIEW, STATUS_CODE_400));
 
 	// eslint-disable-next-line no-unused-vars
-	app.use((err, req, res, next) => sendResponse(INTERNAL_SERVER_ERROR_VIEW, res, STATUS_CODE_500));
+	app.use((err, req, res, next) =>
+		renderView(req, res, INTERNAL_SERVER_ERROR_VIEW, STATUS_CODE_500)
+	);
 };
 
 module.exports = setRoutes;
