@@ -1,8 +1,17 @@
 const express = require('express');
+const expressHandlebars = require('express-handlebars');
 
 const PORT = 3000;
 
 const app = express();
+
+app.engine(
+	'handlebars',
+	expressHandlebars({
+		defaultLayout: 'main',
+	})
+);
+app.set('view engine', 'handlebars');
 
 const formatHeaders = (headers) => {
 	const keyValueHeaders = Object.keys(headers).map((key) => {
@@ -21,6 +30,8 @@ app.get('/retrieve-headers', (req, res) => {
 
 	res.send(formattedHeaders);
 });
+
+app.get('/about', (req, res) => res.render('about'));
 
 // Avoid giving information about the server to hackers
 app.disable('x-powered-by');
