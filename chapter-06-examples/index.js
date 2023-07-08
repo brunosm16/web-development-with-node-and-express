@@ -22,5 +22,8 @@ app.get('/retrieve-headers', (req, res) => {
 	res.send(formattedHeaders);
 });
 
+// Avoid giving information about the server to hackers
+app.disable('x-powered-by');
+
 // eslint-disable-next-line no-console
 app.listen(PORT, () => console.log(`Server running at port : ${PORT}`));
