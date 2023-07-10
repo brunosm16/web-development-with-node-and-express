@@ -18,6 +18,16 @@ app.get('/no-layout', (req, res) => res.render('no-layout', { layout: null }));
 app.get('/customized-layout', (req, res) =>
 	res.render('customized-layout', { layout: 'customized' })
 );
+app.get('/plain-text', (req, res) => {
+	res.type('text/plain');
+	res.send('Hey this is a plain text');
+});
 app.use((req, res) => res.status(404).render('404'));
+// eslint-disable-next-line no-unused-vars
+app.use((err, req, res, next) => {
+	// eslint-disable-next-line no-console
+	console.error(`Internal Server Error Message: ${err?.message}`);
+	res.status(500).render('error-handler', { errorMessage: 'Internal Server Error' });
+});
 // eslint-disable-next-line no-console
 app.listen(PORT, () => console.log(`Server running at port : ${PORT}`));
