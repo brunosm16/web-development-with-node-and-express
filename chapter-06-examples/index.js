@@ -1,40 +1,19 @@
 const express = require('express');
-const expressHandlebars = require('express-handlebars');
+const setHandlebars = require('./middlewares/set-handlebars');
+const appDisable = require('./middlewares/app-disable');
+const formatRequestHeaders = require('./utils/format-request-headers');
+const retrieveInfoData = require('./utils/retrieve-info-data');
 
 const PORT = 3000;
 
 const app = express();
 
-app.engine(
-	'handlebars',
-	expressHandlebars({
-		defaultLayout: 'main',
-	})
-);
-app.set('view engine', 'handlebars');
+setHandlebars(app);
+appDisable(app);
 
-const formatHeaders = (headers) => {
-	const keyValueHeaders = Object.keys(headers).map((key) => {
-		const value = headers[key];
-
-		return `${key}: ${value}`;
-	});
-
-	return keyValueHeaders;
-};
-
-app.get('/retrieve-headers', (req, res) => {
-	const { headers } = req;
-
-	const formattedHeaders = formatHeaders(headers);
-
-	res.send(formattedHeaders);
-});
-
+app.get('/retrieve-headers', (req = {}, res = {}) => res.send(formatRequestHeaders(req?.headers)));
 app.get('/about', (req, res) => res.render('about'));
-
-// Avoid giving information about the server to hackers
-app.disable('x-powered-by');
-
+app.get('/retrieve-info-data', (req, res) => res.render('retrieve-info-data', retrieveInfoData()));
+app.use((req, res) => res.status(404).render('404'));
 // eslint-disable-next-line no-console
 app.listen(PORT, () => console.log(`Server running at port : ${PORT}`));
