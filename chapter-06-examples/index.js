@@ -15,6 +15,9 @@ app.get('/retrieve-headers', (req = {}, res = {}) => res.send(formatRequestHeade
 app.get('/about', (req, res) => res.render('about'));
 app.get('/retrieve-info-data', (req, res) => res.render('retrieve-info-data', retrieveInfoData()));
 app.get('/no-layout', (req, res) => res.render('no-layout', { layout: null }));
+app.get('/customized-layout', (req, res) =>
+	res.render('customized-layout', { layout: 'customized' })
+);
 app.use((req, res) => res.status(404).render('404'));
 // eslint-disable-next-line no-console
 app.listen(PORT, () => console.log(`Server running at port : ${PORT}`));
