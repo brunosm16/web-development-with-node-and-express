@@ -5,6 +5,7 @@ const formatRequestHeaders = require('./utils/format-request-headers');
 const retrieveInfoData = require('./utils/retrieve-info-data');
 const setBodyParser = require('./middlewares/set-body-parser');
 const handlers = require('./handlers');
+const getMockProducts = require('./mocks/get-mock-products');
 
 const PORT = 3000;
 
@@ -28,6 +29,7 @@ app.get('/plain-text', (req, res) => {
 app.get('/display-form-data', (req, res) => res.render('display-form-data'));
 app.get('/error-handler', (req, res) => res.status(500).render('error-handler'));
 app.post('/process-form', handlers.processForm);
+app.get('/get-products', (req, res) => res.json(getMockProducts()));
 app.use((req, res) => res.status(404).render('404'));
 // eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {
