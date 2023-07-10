@@ -30,6 +30,7 @@ app.get('/display-form-data', (req, res) => res.render('display-form-data'));
 app.get('/error-handler', (req, res) => res.status(500).render('error-handler'));
 app.post('/process-form', handlers.processForm);
 app.get('/get-products', (req, res) => res.json(getMockProducts()));
+app.get('/get-products-xml', handlers.processProducts);
 app.use((req, res) => res.status(404).render('404'));
 // eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {
