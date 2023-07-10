@@ -3,12 +3,15 @@ const setHandlebars = require('./middlewares/set-handlebars');
 const appDisable = require('./middlewares/app-disable');
 const formatRequestHeaders = require('./utils/format-request-headers');
 const retrieveInfoData = require('./utils/retrieve-info-data');
+const setBodyParser = require('./middlewares/set-body-parser');
+const handlers = require('./handlers');
 
 const PORT = 3000;
 
 const app = express();
 
 setHandlebars(app);
+setBodyParser(app);
 appDisable(app);
 
 app.get('/retrieve-headers', (req = {}, res = {}) => res.send(formatRequestHeaders(req?.headers)));
@@ -22,6 +25,9 @@ app.get('/plain-text', (req, res) => {
 	res.type('text/plain');
 	res.send('Hey this is a plain text');
 });
+app.get('/display-form-data', (req, res) => res.render('display-form-data'));
+app.get('/error-handler', (req, res) => res.status(500).render('error-handler'));
+app.post('/process-form', handlers.processForm);
 app.use((req, res) => res.status(404).render('404'));
 // eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {
