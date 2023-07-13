@@ -1,0 +1,18 @@
+<div class='weather-widget'>
+	{{#each partials.weatherContext}}
+		<div class='weather-location'>
+			<h3>Location: {{location.name}}</h3>
+			<h3>Weather {{weather}}</h3>
+			<h3>Temperature : {{temp}}</h3>
+		</div>
+
+		<div class='weather-forecast'>
+            <a href="{{location.forecastUrl}}">Forecast URL</a>
+            <img src="{{iconUrl}}" alt="{{weather}}"/>
+		</div>
+	{{/each}}
+
+	<div class='weather-source-info'>
+		<a href='https://www.weather.gov/documentation/services-web-api'>Source information</a>
+	</div>
+</div>
