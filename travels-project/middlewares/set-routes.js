@@ -11,6 +11,7 @@ const {
 } = require('../constants/views-names');
 const { getRandomCity } = require('../lib/city-suggestion');
 const renderView = require('../lib/route-handlers');
+const handlers = require('../lib/handlers');
 
 const API_PREFIX = '/travels';
 
@@ -20,6 +21,10 @@ const setRoutes = (app) => {
 	);
 
 	app.get(`${API_PREFIX}/about`, (req, res) => renderView(req, res, ABOUT_VIEW, STATUS_CODE_200));
+
+	app.get(`${API_PREFIX}/newsletter-signup`, handlers.newsLetterSignUp);
+	app.post(`${API_PREFIX}/newsletter-signup/process-info`, handlers.newsLetterSignUpProcessInfo);
+	app.get(`${API_PREFIX}/newsletter-signup/thanks`, handlers.newsLetterThanks);
 
 	app.use((req, res) => renderView(req, res, NOT_FOUND_VIEW, STATUS_CODE_400));
 
