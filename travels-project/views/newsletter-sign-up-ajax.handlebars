@@ -1,0 +1,54 @@
+<div class='newsletter-container'>
+	<h3 class='newsletter-container-title'>Hey, welcome to our newsletter!</h3>
+
+	<div class='newsletter-container-form form-horizontal'>
+		<form role='form' method='POST'>
+			<input
+				class='newsletter-container-form-secret-input'
+				value='{{fakeSecret}}'
+				type='hidden'
+				name='fakeSecret'
+			/>
+
+			<div class='newsletter-container-form-group'>
+				<label
+					class='newsletter-container-form-group-label col-sm-2 control-label'
+					for='username-field'
+				>Please, inform your name</label>
+
+				<div class='col-sm-4'>
+					<input
+						class='newsletter-container-form-group-input col-sm-2 control-label'
+						id='username-field'
+						name='name'
+						type='text'
+					/>
+				</div>
+			</div>
+
+			<div class='newsletter-container-form-group'>
+				<label
+					class='newsletter-container-form-group-label col-sm-2 control-label'
+					for='email-field'
+				>Please, inform your email</label>
+
+				<div class='col-sm-4'>
+					<input
+						class='newsletter-container-form-group-input col-sm-2 control-label'
+						id='email-field'
+						name='email'
+						type='text'
+					/>
+				</div>
+			</div>
+
+			<div class='newsletter-container-form-group'>
+				<div class='newsletter-container-form-group-btn'>
+					<button class='form-group-btn btn btn-primary' type='submit'>
+						Confirm
+					</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>

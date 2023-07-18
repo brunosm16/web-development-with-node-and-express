@@ -13,21 +13,18 @@ const { getRandomCity } = require('../lib/city-suggestion');
 const renderView = require('../lib/route-handlers');
 const handlers = require('../lib/handlers');
 
-const TRAVELS_PAGE = '/travels';
-const NEWSLETTER_PAGE = '/newsletter/signup';
-
 const setTravelsRoutes = (app) => {
-	app.get(TRAVELS_PAGE, (req, res) =>
+	app.get('/travels', (req, res) =>
 		renderView(req, res, HOMEPAGE_VIEW, STATUS_CODE_200, { suggestionCity: getRandomCity() })
 	);
 
-	app.get(`${TRAVELS_PAGE}/about`, (req, res) => renderView(req, res, ABOUT_VIEW, STATUS_CODE_200));
+	app.get(`/travels/about`, (req, res) => renderView(req, res, ABOUT_VIEW, STATUS_CODE_200));
 };
 
 const setNewsLetterRoutes = (app) => {
-	app.get(`${NEWSLETTER_PAGE}`, handlers.newsLetterSignUp);
-	app.post(`${NEWSLETTER_PAGE}/process-info`, handlers.newsLetterSignUpProcessInfo);
-	app.get(`${NEWSLETTER_PAGE}/thanks`, handlers.newsLetterThanks);
+	app.get(`/newsletter/signup`, handlers.newsLetterSignUp);
+	app.post(`/newsletter/signup/process-info`, handlers.newsLetterSignUpProcessInfo);
+	app.get(`/newsletter/signup/thanks`, handlers.newsLetterThanks);
 };
 
 const setRoutes = (app) => {
