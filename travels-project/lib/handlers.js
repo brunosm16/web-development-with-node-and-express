@@ -14,7 +14,7 @@ const newsLetterSignUpProcessInfo = (req, res) => {
 	console.log(`Email: ${body?.email}`);
 	console.log(`Form type: ${query?.typeForm}`);
 
-	res.redirect(STATUS_CODE_303, '/travels/newsletter-signup/thanks');
+	res.redirect(STATUS_CODE_303, '/newsletter/signup/thanks');
 };
 
 const newsLetterThanks = (req, res) => {
