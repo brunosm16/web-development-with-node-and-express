@@ -3,6 +3,9 @@ const expressHandlebars = require('express-handlebars');
 const bodyParser = require('body-parser');
 const setRoutes = require('./middlewares/set-routes');
 const weatherMiddleware = require('./middlewares/weather');
+const { credentials } = require('./config/config');
+
+console.log(credentials);
 
 const app = express();
 
